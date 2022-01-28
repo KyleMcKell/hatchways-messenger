@@ -9,7 +9,7 @@ const Messages = (props) => {
 	return (
 		<Box>
 			{messages
-				.slice(0, messages.length - 1)
+				.slice(0, messages.length)
 				.reverse()
 				.map((message) => {
 					const time = moment(message.createdAt).format('h:mm');
