@@ -5,7 +5,7 @@ import { Grid, CssBaseline, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { SidebarContainer } from "./Sidebar";
 import { ActiveChat } from "./ActiveChat";
-import { logout, fetchConversations } from "../store/utils/thunkCreators";
+import { logout, fetchModifiedConversations } from "../store/utils/thunkCreators";
 import { clearOnLogout } from "../store/index";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +26,7 @@ const Home = (props) => {
   }, [user.id]);
 
   useEffect(() => {
+    // calls fetchModifiedConversations (see mapDispatchToProps)
     fetchConversations();
   }, [fetchConversations]);
 
@@ -68,7 +69,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(clearOnLogout());
     },
     fetchConversations: () => {
-      dispatch(fetchConversations());
+      dispatch(fetchModifiedConversations());
     }
   };
 };

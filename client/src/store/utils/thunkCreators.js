@@ -4,7 +4,7 @@ import {
   gotConversations,
   addConversation,
   setNewMessage,
-  setSearchedUsers,
+  setSearchedUsers
 } from "../conversations";
 import { gotUser, setFetchingStatus } from "../user";
 
@@ -69,16 +69,24 @@ export const logout = (id) => async (dispatch) => {
 
 // CONVERSATIONS THUNK CREATORS
 
+// reverses messages within data
 const reverseMessages = (data) => {
   return data.map((convo) => ({
     ...convo,
-    messages: [...convo.messages].reverse(),
+    messages: convo.messages.reverse()
   }));
 };
 
-export const fetchConversations = () => async (dispatch) => {
+// fetches all conversations without any modification
+const fetchConversations = async () => {
+  const { data } = await axios.get("/api/conversations");
+  return data;
+};
+
+// fetches all conversations with messages reversed
+export const fetchModifiedConversations = () => async (dispatch) => {
   try {
-    const { data } = await axios.get("/api/conversations");
+    const data = await fetchConversations();
     const reversedMessagesData = reverseMessages(data);
     dispatch(gotConversations(reversedMessagesData));
   } catch (error) {
@@ -95,7 +103,7 @@ const sendMessage = (data, body) => {
   socket.emit("new-message", {
     message: data.message,
     recipientId: body.recipientId,
-    sender: data.sender,
+    sender: data.sender
   });
 };
 
