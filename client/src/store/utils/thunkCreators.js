@@ -86,18 +86,9 @@ const fetchConversations = async () => {
 // fetches all conversations with messages reversed
 export const fetchModifiedConversations = () => async (dispatch) => {
   try {
-<<<<<<< HEAD
     const data = await fetchConversations();
     const reversedMessagesData = reverseMessages(data);
     dispatch(gotConversations(reversedMessagesData));
-=======
-    const { data } = await axios.get("/api/conversations");
-    const dataCopy = data.map((convo) => ({
-      ...convo,
-      messages: convo.messages.reverse(),
-    }));
-    dispatch(gotConversations(dataCopy));
->>>>>>> ed883b67ff57021c7267e1296752fd6a3b5172c2
   } catch (error) {
     console.error(error);
   }
