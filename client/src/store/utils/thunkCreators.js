@@ -72,7 +72,11 @@ export const logout = (id) => async (dispatch) => {
 export const fetchConversations = () => async (dispatch) => {
   try {
     const { data } = await axios.get("/api/conversations");
-    dispatch(gotConversations(data));
+    const dataCopy = JSON.parse(JSON.stringify(data));
+    dataCopy.forEach((convo) => {
+      convo.messages.reverse();
+    });
+    dispatch(gotConversations(dataCopy));
   } catch (error) {
     console.error(error);
   }
@@ -98,9 +102,9 @@ export const postMessage = (body) => async (dispatch) => {
     const data = await saveMessage(body);
 
     if (!body.conversationId) {
-      await dispatch(addConversation(body.recipientId, data.message));
+      dispatch(addConversation(body.recipientId, data.message));
     } else {
-      await dispatch(setNewMessage(data.message));
+      dispatch(setNewMessage(data.message));
     }
 
     sendMessage(data, body);
