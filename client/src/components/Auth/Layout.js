@@ -10,7 +10,7 @@ const Layout = () => {
       flexDirection={"row-reverse"}
       sx={{ height: "100%" }}
     >
-      <Box flex={1}>
+      <Box flex={"auto"}>
         <div className="main-header">
           <div className="main-header-text"></div>
           <div className="routing-button"></div>

@@ -8,30 +8,49 @@ const useStyles = makeStyles((theme) => ({
   root: {
     position: "relative",
     height: "100%",
-    isolation: "isolate"
+    flex: 1,
+    isolation: "isolate",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    maxWidth: "700px",
+    minWidth: "425px",
+    [theme.breakpoints.down("sm")]: {
+      display: "none"
+    }
   },
+
   contentContainer: {
     position: "absolute",
-    bottom: "50%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
     textAlign: "center",
-    padding: "0px 80px",
-    gap: "2.5rem"
+    padding: "0px clamp(40px, 3vw + 40px, 80px)",
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    gap: "40px"
   },
   content: {
     color: "white",
     fontWeight: "normal",
     fontStyle: "normal",
-    fontSize: "1.625rem",
+    fontSize: "clamp(1.5rem, 2vw + 1rem, 2.5rem)",
     lineHeight: "154%"
   },
+  icon: {
+    width: "clamp(70px, 1vw + 70px, 25%)"
+  },
+  spacer: {
+    height: "100px"
+  },
+
   backgroundContainer: {
     isolation: "isolate",
     position: "relative",
     height: "100%",
-    zIndex: -1
+    zIndex: -1,
+    width: "100%"
   },
   background: {
     background: `linear-gradient(180deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.secondary} 100%)`,
@@ -45,7 +64,10 @@ const useStyles = makeStyles((theme) => ({
   },
   backgroundImg: {
     height: "100%",
-    zIndex: 100
+    width: "100%",
+    zIndex: 100,
+    objectFit: "cover",
+    objectPosition: "center top"
   }
 }));
 
@@ -55,12 +77,11 @@ const Sidebar = () => {
   return (
     <Box className={classes.root}>
       <Box position={"absolute"} className={classes.contentContainer}>
-        <Box classes={classes.iconContainer}>
-          <img src={bubble} className="icon" alt="icon" />
-        </Box>
+        <img src={bubble} className={classes.icon} alt="icon" />
         <Typography variant="h2" className={classes.content}>
           Converse with anyone with any language
         </Typography>
+        <Box className={classes.spacer} />
       </Box>
       <Box className={classes.backgroundContainer}>
         <Box className={classes.background} />
