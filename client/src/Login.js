@@ -7,9 +7,12 @@ import {
   Typography,
   Button,
   FormControl,
-  TextField,
+  TextField
 } from "@material-ui/core";
 import { login } from "./store/utils/thunkCreators";
+import bubble from "./assets/bubble.svg";
+import backgroundImg from "./assets/bg-img.png";
+import Layout from "./components/Auth/Layout";
 
 const Login = (props) => {
   const history = useHistory();
@@ -27,48 +30,50 @@ const Login = (props) => {
     return <Redirect to="/home" />;
   }
 
-  return (
-    <Grid container justify="center">
-      <Box>
-        <Grid container item>
-          <Typography>Need to register?</Typography>
-          <Button onClick={() => history.push("/register")}>Register</Button>
-        </Grid>
-        <form onSubmit={handleLogin}>
-          <Grid>
-            <Grid>
-              <FormControl margin="normal" required>
-                <TextField
-                  aria-label="username"
-                  label="Username"
-                  name="username"
-                  type="text"
-                />
-              </FormControl>
-            </Grid>
-            <FormControl margin="normal" required>
-              <TextField
-                label="password"
-                aria-label="password"
-                type="password"
-                name="password"
-              />
-            </FormControl>
-            <Grid>
-              <Button type="submit" variant="contained" size="large">
-                Login
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
-      </Box>
-    </Grid>
-  );
+  // return (
+  //   <Grid container justify="center">
+  //     <Box>
+  //       <Grid container item>
+  //         <Typography>Need to register?</Typography>
+  //         <Button onClick={() => history.push("/register")}>Register</Button>
+  //       </Grid>
+  //       <form onSubmit={handleLogin}>
+  //         <Grid>
+  //           <Grid>
+  //             <FormControl margin="normal" required>
+  //               <TextField
+  //                 aria-label="username"
+  //                 label="Username"
+  //                 name="username"
+  //                 type="text"
+  //               />
+  //             </FormControl>
+  //           </Grid>
+  //           <FormControl margin="normal" required>
+  //             <TextField
+  //               label="password"
+  //               aria-label="password"
+  //               type="password"
+  //               name="password"
+  //             />
+  //           </FormControl>
+  //           <Grid>
+  //             <Button type="submit" variant="contained" size="large">
+  //               Login
+  //             </Button>
+  //           </Grid>
+  //         </Grid>
+  //       </form>
+  //     </Box>
+  //   </Grid>
+  // );
+
+  return <Layout />;
 };
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
+    user: state.user
   };
 };
 
@@ -76,7 +81,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     login: (credentials) => {
       dispatch(login(credentials));
-    },
+    }
   };
 };
 
