@@ -69,14 +69,26 @@ export const logout = (id) => async (dispatch) => {
 
 // CONVERSATIONS THUNK CREATORS
 
-export const fetchConversations = () => async (dispatch) => {
+// reverses messages within data
+const reverseMessages = (data) => {
+  return data.map((convo) => ({
+    ...convo,
+    messages: convo.messages.reverse()
+  }));
+};
+
+// fetches all conversations without any modification
+const fetchConversations = async () => {
+  const { data } = await axios.get("/api/conversations");
+  return data;
+};
+
+// fetches all conversations with messages reversed
+export const fetchModifiedConversations = () => async (dispatch) => {
   try {
-    const { data } = await axios.get("/api/conversations");
-    const dataCopy = data.map((convo) => ({
-      ...convo,
-      messages: convo.messages.reverse(),
-    }));
-    dispatch(gotConversations(dataCopy));
+    const data = await fetchConversations();
+    const reversedMessagesData = reverseMessages(data);
+    dispatch(gotConversations(reversedMessagesData));
   } catch (error) {
     console.error(error);
   }
