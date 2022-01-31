@@ -3,7 +3,7 @@ import React from "react";
 import { Sidebar } from "./index";
 import { makeStyles } from "@material-ui/styles";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     height: "100%",
     display: "flex",
