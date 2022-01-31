@@ -9,7 +9,8 @@ const useStyles = makeStyles((theme) => ({
     padding: "1rem 2.5rem",
     boxShadow: "0px 2px 12px hsla(215, 34%, 44%, 0.2)",
     borderRadius: "5px",
-    minWidth: "140px"
+    minWidth: "140px",
+    whiteSpace: "nowrap"
   }
 }));
 

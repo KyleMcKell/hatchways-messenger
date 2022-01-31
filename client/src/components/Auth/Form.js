@@ -13,11 +13,8 @@ const useStyles = makeStyles((theme) => ({
   formContainer: {
     display: "flex",
     flexDirection: "column",
-    minWidth: "380px",
-    gap: "3rem",
-    [theme.breakpoints.down("xs")]: {
-      minWidth: "90vw"
-    }
+    width: "clamp(300px, 40vw + 10rem, 450px)",
+    gap: "3rem"
   }
 }));
 

@@ -12,10 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
   question: {
     fontSize: "1rem",
-    color: theme.palette.secondary.main,
-    [theme.breakpoints.down("xs")]: {
-      display: "none"
-    }
+    color: theme.palette.secondary.main
   }
 }));
 

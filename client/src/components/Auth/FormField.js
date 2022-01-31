@@ -5,7 +5,6 @@ import { FormControl } from "@material-ui/core";
 const useStyles = makeStyles(() => ({
   root: {
     width: "100%",
-    maxWidth: "400px",
     fontWeight: 600,
     "&:last-of-type": {
       marginBottom: "1.5rem"
