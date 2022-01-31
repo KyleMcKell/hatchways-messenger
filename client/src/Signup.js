@@ -46,6 +46,7 @@ const Login = (props) => {
             aria-label="username"
             name="username"
             type="text"
+            id="username"
             required
           />
         </FormField>
@@ -56,6 +57,7 @@ const Login = (props) => {
             aria-label="e-mail address"
             type="email"
             name="email"
+            id="email"
             required
           />
         </FormField>
@@ -67,6 +69,7 @@ const Login = (props) => {
             type="password"
             inputProps={{ minLength: 6 }}
             name="password"
+            id="password"
             required
           />
         </FormField>
