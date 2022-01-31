@@ -8,8 +8,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    flex: 1,
-    height: "calc(100% - (2.5 * 120px))"
+    flex: 4
     // 100% - 2x the height of our header to center plus a little more to make it look nicer
   },
   formContainer: {

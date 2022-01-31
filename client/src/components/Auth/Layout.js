@@ -10,7 +10,12 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row-reverse"
   },
   content: {
-    flex: "auto"
+    flex: "auto",
+    display: "flex",
+    flexDirection: "column"
+  },
+  spacer: {
+    flex: "1"
   }
 }));
 
@@ -19,7 +24,10 @@ const Layout = ({ children }) => {
 
   return (
     <Box className={classes.root}>
-      <Box className={classes.content}>{children}</Box>
+      <Box className={classes.content}>
+        {children}
+        <Box className={classes.spacer} />
+      </Box>
       <Sidebar />
     </Box>
   );

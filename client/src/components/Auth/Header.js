@@ -8,9 +8,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "end",
     alignItems: "center",
     padding: "30px 42px",
-    gap: "30px",
-    // defining explicit height so Form calc always works12=\
-    height: "60px"
+    gap: "30px"
   },
   question: {
     fontSize: "1rem",
