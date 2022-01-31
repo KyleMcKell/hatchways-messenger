@@ -81,7 +81,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     login: (credentials) => {
       dispatch(login(credentials));
-    }
+    },
   };
 };
 
