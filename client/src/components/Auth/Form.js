@@ -9,14 +9,17 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
+    height: "calc(100% - (2.5 * 120px))"
     // 100% - 2x the height of our header to center plus a little more to make it look nicer
-    height: "calc(100% - (3 * 120px))"
   },
   formContainer: {
     display: "flex",
     flexDirection: "column",
     minWidth: "380px",
-    gap: "3rem"
+    gap: "3rem",
+    [theme.breakpoints.down("xs")]: {
+      minWidth: "90vw"
+    }
   },
   heading: {
     fontWeight: 600,

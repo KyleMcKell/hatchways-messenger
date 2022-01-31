@@ -18,13 +18,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("xs")]: {
       display: "none"
     }
-  },
-  button: {
-    fontSize: "1rem",
-    color: theme.palette.primary.main,
-    padding: "16px 52px",
-    boxShadow: "0px 2px 12px hsl(215 34% 44% / 0.2)",
-    borderRadius: "5px"
   }
 }));
 
