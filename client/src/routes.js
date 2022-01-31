@@ -56,7 +56,7 @@ const Routes = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
   };
 };
 
@@ -64,7 +64,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchUser() {
       dispatch(fetchUser());
-    }
+    },
   };
 };
 
