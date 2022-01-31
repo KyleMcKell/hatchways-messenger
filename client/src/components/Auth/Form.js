@@ -9,7 +9,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     flex: 4
-    // 100% - 2x the height of our header to center plus a little more to make it look nicer
   },
   formContainer: {
     display: "flex",
@@ -18,20 +17,6 @@ const useStyles = makeStyles((theme) => ({
     gap: "3rem",
     [theme.breakpoints.down("xs")]: {
       minWidth: "90vw"
-    }
-  },
-  heading: {
-    fontWeight: 600,
-    fontSize: "clamp(1.875rem, 2vw + 1rem, 2.4rem)"
-  },
-  adornmentLink: {
-    fontWeight: 600
-  },
-  textfield: {
-    width: "100%",
-    maxWidth: "400px",
-    "&:last-of-type": {
-      marginBottom: "1.5rem"
     }
   }
 }));
