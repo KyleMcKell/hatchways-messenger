@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     minWidth: "380px",
-    gap: "2.5rem"
+    gap: "3rem"
   },
   heading: {
     fontWeight: 600,

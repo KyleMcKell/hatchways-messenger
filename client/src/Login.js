@@ -8,10 +8,11 @@ import {
   HeaderButton,
   Form,
   FormHeading,
+  FormLabel,
   FormButton,
   ForgotLink
 } from "./components/Auth";
-import { FormLabel, TextField } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import FormField from "./components/Auth/FormField";
 
 const Login = (props) => {
@@ -39,13 +40,23 @@ const Login = (props) => {
       </Header>
       <Form onSubmit={handleLogin}>
         <FormHeading>Welcome Back!</FormHeading>
-        <FormField required>
-          <FormLabel required={false}>E-mail address</FormLabel>
-          <TextField aria-label="username" name="username" type="text" />
-        </FormField>
-        <FormField required>
-          <FormLabel required={false}>Password</FormLabel>
+        <FormField>
+          <FormLabel htmlFor="username" required={false}>
+            E-mail address
+          </FormLabel>
           <TextField
+            id="username"
+            aria-label="username"
+            name="username"
+            type="text"
+          />
+        </FormField>
+        <FormField>
+          <FormLabel htmlFor="password" required={false}>
+            Password
+          </FormLabel>
+          <TextField
+            id="password"
             aria-label="password"
             type="password"
             name="password"

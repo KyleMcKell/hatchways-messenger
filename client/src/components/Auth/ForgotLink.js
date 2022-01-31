@@ -4,7 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
   adornmentLink: {
-    fontWeight: 600
+    fontWeight: 600,
+    marginBottom: "0.5rem"
   }
 }));
 

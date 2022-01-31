@@ -16,11 +16,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const FormButton = ({ onClick, children }) => {
+const FormButton = ({ children, ...delegated }) => {
   const classes = useStyles();
 
   return (
-    <Button onClick={onClick} className={classes.root}>
+    <Button className={classes.root} {...delegated}>
       {children}
     </Button>
   );
