@@ -47,6 +47,7 @@ const Login = (props) => {
             aria-label="username"
             name="username"
             type="text"
+            placeholder="andy@language.com"
           />
         </FormField>
         <FormField>
@@ -56,6 +57,7 @@ const Login = (props) => {
             aria-label="password"
             type="password"
             name="password"
+            placeholder="password123"
             InputProps={{
               endAdornment: <ForgotLink />
             }}

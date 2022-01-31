@@ -47,6 +47,7 @@ const Login = (props) => {
             name="username"
             type="text"
             id="username"
+            placeholder="andy-language"
             required
           />
         </FormField>
@@ -58,6 +59,7 @@ const Login = (props) => {
             type="email"
             name="email"
             id="email"
+            placeholder="andy@language.com"
             required
           />
         </FormField>
@@ -70,6 +72,7 @@ const Login = (props) => {
             inputProps={{ minLength: 6 }}
             name="password"
             id="password"
+            placeholder="password123"
             required
           />
         </FormField>
