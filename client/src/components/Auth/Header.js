@@ -1,7 +1,6 @@
 import React from "react";
-import { Box, Typography, Button } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -9,17 +8,22 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "end",
     alignItems: "center",
     padding: "30px 42px",
-    gap: "30px"
+    gap: "30px",
+    // defining explicit height so Form calc always works12=\
+    height: "60px"
   },
   question: {
     fontSize: "1rem",
-    color: theme.palette.secondary.main
+    color: theme.palette.secondary.main,
+    [theme.breakpoints.down("xs")]: {
+      display: "none"
+    }
   },
   button: {
     fontSize: "1rem",
     color: theme.palette.primary.main,
     padding: "16px 52px",
-    boxShadow: "0px 2px 12px hsla(215, 34%, 44%, 0.2)",
+    boxShadow: "0px 2px 12px hsl(215 34% 44% / 0.2)",
     borderRadius: "5px"
   }
 }));

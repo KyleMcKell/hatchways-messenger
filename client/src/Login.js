@@ -2,7 +2,17 @@ import React from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "./store/utils/thunkCreators";
-import { Layout, Header, HeaderButton, Form } from "./components/Auth";
+import {
+  Layout,
+  Header,
+  HeaderButton,
+  Form,
+  FormHeading,
+  FormButton,
+  ForgotLink
+} from "./components/Auth";
+import { FormLabel, TextField } from "@material-ui/core";
+import FormField from "./components/Auth/FormField";
 
 const Login = (props) => {
   const history = useHistory();
@@ -28,13 +38,25 @@ const Login = (props) => {
         </HeaderButton>
       </Header>
       <Form onSubmit={handleLogin}>
-        <div className="main-content-form">
-          <div className="form-field">
-            <div className="label"></div>
-            <div className="input"></div>
-          </div>
-          <div className="form-button"></div>
-        </div>
+        <FormHeading>Welcome Back!</FormHeading>
+        <FormField required>
+          <FormLabel required={false}>E-mail address</FormLabel>
+          <TextField aria-label="username" name="username" type="text" />
+        </FormField>
+        <FormField required>
+          <FormLabel required={false}>Password</FormLabel>
+          <TextField
+            aria-label="password"
+            type="password"
+            name="password"
+            InputProps={{
+              endAdornment: <ForgotLink />
+            }}
+          />
+        </FormField>
+        <FormButton type="submit" variant="contained" size="large">
+          Login
+        </FormButton>
       </Form>
     </Layout>
   );

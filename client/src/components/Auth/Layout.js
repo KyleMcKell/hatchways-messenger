@@ -18,7 +18,7 @@ const Layout = ({ children }) => {
   const classes = useStyles();
 
   return (
-    <Box container className={classes.root}>
+    <Box className={classes.root}>
       <Box className={classes.content}>{children}</Box>
       <Sidebar />
     </Box>

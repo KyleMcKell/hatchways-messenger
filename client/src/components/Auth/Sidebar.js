@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     fontWeight: "normal",
     fontStyle: "normal",
-    fontSize: "clamp(1.5rem, 2vw + 1rem, 2.4rem)",
+    fontSize: "clamp(1.5rem, 2vw + 1rem, 2rem)",
     lineHeight: "154%"
   },
   icon: {
