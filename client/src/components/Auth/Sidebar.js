@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     fontWeight: "normal",
     fontStyle: "normal",
-    fontSize: "clamp(1.5rem, 2vw + 1rem, 2.5rem)",
+    fontSize: "clamp(1.5rem, 2vw + 1rem, 2.4rem)",
     lineHeight: "154%"
   },
   icon: {
@@ -75,8 +75,12 @@ const Sidebar = () => {
   const classes = useStyles();
 
   return (
-    <Box className={classes.root}>
-      <Box position={"absolute"} className={classes.contentContainer}>
+    <Box className={classes.root} component={"aside"}>
+      <Box
+        position={"absolute"}
+        className={classes.contentContainer}
+        component={"section"}
+      >
         <img src={bubble} className={classes.icon} alt="icon" />
         <Typography variant="h2" className={classes.content}>
           Converse with anyone with any language

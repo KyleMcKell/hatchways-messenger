@@ -1,32 +1,25 @@
-import { Grid, Box, Typography } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 import React from "react";
-import Sidebar from "./Sidebar";
+import { Sidebar } from "./index";
+import { makeStyles } from "@material-ui/styles";
 
-const Layout = () => {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    height: "100%",
+    display: "flex",
+    flexDirection: "row-reverse"
+  },
+  content: {
+    flex: "auto"
+  }
+}));
+
+const Layout = ({ children }) => {
+  const classes = useStyles();
+
   return (
-    <Box
-      container
-      display={"flex"}
-      flexDirection={"row-reverse"}
-      sx={{ height: "100%" }}
-    >
-      <Box flex={"auto"}>
-        <div className="main-header">
-          <div className="main-header-text"></div>
-          <div className="routing-button"></div>
-        </div>
-        <div className="main-content">
-          <Typography variant="h1">Heading</Typography>
-          <div className="main-content-form">
-            <div className="form-field">
-              <div className="label"></div>
-              <div className="input"></div>
-            </div>
-            <div className="form-button"></div>
-          </div>
-        </div>
-      </Box>
-
+    <Box container className={classes.root}>
+      <Box className={classes.content}>{children}</Box>
       <Sidebar />
     </Box>
   );
