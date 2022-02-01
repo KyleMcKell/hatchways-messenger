@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     color: "white",
-    fontSize: "clamp(1.5rem, 2vw + 1rem, 2rem)",
+    fontSize: "clamp(1.5rem, 2vw + 1rem, 1.875rem)",
     lineHeight: "154%"
   },
   icon: {

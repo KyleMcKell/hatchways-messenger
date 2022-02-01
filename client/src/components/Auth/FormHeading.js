@@ -5,7 +5,8 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   root: {
     fontWeight: 600,
-    fontSize: "clamp(1.875rem, 2vw + 1rem, 2.4rem)",
+    fontSize: "clamp(1.875rem, 2vw + 1rem, 2rem)",
+    marginBottom: "-1rem",
     [theme.breakpoints.down("xs")]: {
       alignSelf: "start"
     }
