@@ -14,7 +14,7 @@ const ForgotLink = () => {
 
   return (
     <InputAdornment position="end">
-      <Link className={classes.adornmentLink} href="/" fontWeight={600}>
+      <Link className={classes.adornmentLink} href="/">
         Forgot?
       </Link>
     </InputAdornment>
