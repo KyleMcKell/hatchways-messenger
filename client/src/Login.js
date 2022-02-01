@@ -1,15 +1,19 @@
 import React from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import {
-  Grid,
-  Box,
-  Typography,
-  Button,
-  FormControl,
-  TextField,
-} from "@material-ui/core";
 import { login } from "./store/utils/thunkCreators";
+import {
+  Layout,
+  Header,
+  HeaderButton,
+  Form,
+  FormHeading,
+  FormLabel,
+  FormButton,
+  ForgotLink,
+  FormField
+} from "./components/Auth";
+import { TextField } from "@material-ui/core";
 
 const Login = (props) => {
   const history = useHistory();
@@ -28,41 +32,42 @@ const Login = (props) => {
   }
 
   return (
-    <Grid container justify="center">
-      <Box>
-        <Grid container item>
-          <Typography>Need to register?</Typography>
-          <Button onClick={() => history.push("/register")}>Register</Button>
-        </Grid>
-        <form onSubmit={handleLogin}>
-          <Grid>
-            <Grid>
-              <FormControl margin="normal" required>
-                <TextField
-                  aria-label="username"
-                  label="Username"
-                  name="username"
-                  type="text"
-                />
-              </FormControl>
-            </Grid>
-            <FormControl margin="normal" required>
-              <TextField
-                label="password"
-                aria-label="password"
-                type="password"
-                name="password"
-              />
-            </FormControl>
-            <Grid>
-              <Button type="submit" variant="contained" size="large">
-                Login
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
-      </Box>
-    </Grid>
+    <Layout>
+      <Header question={"Don't have an account?"}>
+        <HeaderButton onClick={() => history.push("/register")}>
+          Create account
+        </HeaderButton>
+      </Header>
+      <Form onSubmit={handleLogin}>
+        <FormHeading>Welcome Back!</FormHeading>
+        <FormField>
+          <FormLabel htmlFor="username">E-mail address</FormLabel>
+          <TextField
+            id="username"
+            aria-label="username"
+            name="username"
+            type="text"
+            placeholder="andy@language.com"
+          />
+        </FormField>
+        <FormField>
+          <FormLabel htmlFor="password">Password</FormLabel>
+          <TextField
+            id="password"
+            aria-label="password"
+            type="password"
+            name="password"
+            placeholder="password123"
+            InputProps={{
+              endAdornment: <ForgotLink />
+            }}
+          />
+        </FormField>
+        <FormButton type="submit" variant="contained" size="large">
+          Login
+        </FormButton>
+      </Form>
+    </Layout>
   );
 };
 

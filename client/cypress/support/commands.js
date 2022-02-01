@@ -5,7 +5,6 @@ Cypress.Commands.add("signup", (username, email, password) => {
   cy.get("input[name=username]").type(username);
   cy.get("input[name=email]").type(email);
   cy.get("input[name=password]").type(password);
-  cy.get("input[name=confirmPassword]").type(password);
 
   cy.contains("button", "Create").click();
 });

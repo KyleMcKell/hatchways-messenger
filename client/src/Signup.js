@@ -1,33 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
+import { TextField } from "@material-ui/core";
 import {
-  Grid,
-  Box,
-  Typography,
-  Button,
-  FormControl,
-  TextField,
-  FormHelperText,
-} from "@material-ui/core";
+  Layout,
+  Header,
+  HeaderButton,
+  Form,
+  FormHeading,
+  FormField,
+  FormLabel,
+  FormButton
+} from "./components/Auth";
 import { register } from "./store/utils/thunkCreators";
 
 const Login = (props) => {
   const history = useHistory();
   const { user, register } = props;
-  const [formErrorMessage, setFormErrorMessage] = useState({});
 
   const handleRegister = async (event) => {
     event.preventDefault();
     const username = event.target.username.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
-    const confirmPassword = event.target.confirmPassword.value;
-
-    if (password !== confirmPassword) {
-      setFormErrorMessage({ confirmPassword: "Passwords must match" });
-      return;
-    }
 
     await register({ username, email, password });
   };
@@ -37,73 +32,56 @@ const Login = (props) => {
   }
 
   return (
-    <Grid container justify="center">
-      <Box>
-        <Grid container item>
-          <Typography>Need to log in?</Typography>
-          <Button onClick={() => history.push("/login")}>Login</Button>
-        </Grid>
-        <form onSubmit={handleRegister}>
-          <Grid>
-            <Grid>
-              <FormControl>
-                <TextField
-                  aria-label="username"
-                  label="Username"
-                  name="username"
-                  type="text"
-                  required
-                />
-              </FormControl>
-            </Grid>
-            <Grid>
-              <FormControl>
-                <TextField
-                  label="E-mail address"
-                  aria-label="e-mail address"
-                  type="email"
-                  name="email"
-                  required
-                />
-              </FormControl>
-            </Grid>
-            <Grid>
-              <FormControl error={!!formErrorMessage.confirmPassword}>
-                <TextField
-                  aria-label="password"
-                  label="Password"
-                  type="password"
-                  inputProps={{ minLength: 6 }}
-                  name="password"
-                  required
-                />
-                <FormHelperText>
-                  {formErrorMessage.confirmPassword}
-                </FormHelperText>
-              </FormControl>
-            </Grid>
-            <Grid>
-              <FormControl error={!!formErrorMessage.confirmPassword}>
-                <TextField
-                  label="Confirm Password"
-                  aria-label="confirm password"
-                  type="password"
-                  inputProps={{ minLength: 6 }}
-                  name="confirmPassword"
-                  required
-                />
-                <FormHelperText>
-                  {formErrorMessage.confirmPassword}
-                </FormHelperText>
-              </FormControl>
-            </Grid>
-            <Button type="submit" variant="contained" size="large">
-              Create
-            </Button>
-          </Grid>
-        </form>
-      </Box>
-    </Grid>
+    <Layout>
+      <Header question={"Already have an account?"}>
+        <HeaderButton onClick={() => history.push("/login")}>
+          Login
+        </HeaderButton>
+      </Header>
+      <Form onSubmit={handleRegister}>
+        <FormHeading>Create an account.</FormHeading>
+        <FormField>
+          <FormLabel htmlFor="username">Username</FormLabel>
+          <TextField
+            aria-label="username"
+            name="username"
+            type="text"
+            id="username"
+            placeholder="andy-language"
+            required
+          />
+        </FormField>
+
+        <FormField>
+          <FormLabel htmlFor="email">E-mail address</FormLabel>
+          <TextField
+            aria-label="e-mail address"
+            type="email"
+            name="email"
+            id="email"
+            placeholder="andy@language.com"
+            required
+          />
+        </FormField>
+
+        <FormField>
+          <FormLabel htmlFor="password">Password</FormLabel>
+          <TextField
+            aria-label="password"
+            type="password"
+            inputProps={{ minLength: 6 }}
+            name="password"
+            id="password"
+            placeholder="password123"
+            required
+          />
+        </FormField>
+
+        <FormButton type="submit" variant="contained" size="large">
+          Create
+        </FormButton>
+      </Form>
+    </Layout>
   );
 };
 
