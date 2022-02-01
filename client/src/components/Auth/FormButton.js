@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "1rem 4rem",
     borderRadius: "3px",
     alignSelf: "center",
+    marginTop: "-0.5rem",
     "&:hover": {
       backgroundColor: theme.palette.primary.dark
     }
