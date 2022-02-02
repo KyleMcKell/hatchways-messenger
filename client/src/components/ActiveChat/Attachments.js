@@ -5,11 +5,12 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(() => ({
   root: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))",
     gap: "10px",
     background: "#F4F6FA",
     padding: 10,
-    borderRadius: 8
+    borderRadius: 8,
+    maxWidth: 350 // 3 attachments max
   },
   attachment: {
     borderRadius: 8,

@@ -39,9 +39,11 @@ const SenderBubble = (props) => {
           <Attachments attachments={attachments} />
         </Box>
       )}
-      <Box className={classes.bubble}>
-        <Typography className={classes.text}>{text}</Typography>
-      </Box>
+      {text && (
+        <Box className={classes.bubble}>
+          <Typography className={classes.text}>{text}</Typography>
+        </Box>
+      )}
     </Box>
   );
 };

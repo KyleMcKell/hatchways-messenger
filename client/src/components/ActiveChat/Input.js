@@ -17,7 +17,6 @@ const useStyles = makeStyles(() => ({
     marginBottom: 20
   },
   previewGrid: {
-    // width: "100%"
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
     gap: "10px",
@@ -37,7 +36,6 @@ const Input = (props) => {
   const classes = useStyles();
   const [text, setText] = useState("");
   const [imageSrcs, setImageSrcs] = useState([]);
-  const [attachments, setAttachments] = useState([]);
   const [sending, setSending] = useState(false);
   const { postMessage, otherUser, conversationId, user } = props;
 
@@ -45,7 +43,7 @@ const Input = (props) => {
     setText(event.target.value);
   };
 
-  // when files are added
+  // when files are added, display them as a preview
   const handleFileChange = (fileChangeEvent) => {
     const files = fileChangeEvent.target.files;
     for (let i = 0; i < files.length; i++) {
@@ -65,35 +63,38 @@ const Input = (props) => {
     // uploading images to cloudinary
     const formData = new FormData();
     formData.append("upload_preset", "hatchways");
+    const promises = [];
 
     for (let i = 0; i < imageSrcs.length; i++) {
       // if file already exists, this will replace the old file
       formData.append("file", imageSrcs[i]);
 
-      const res = await fetch(
+      const fetchPromise = fetch(
         "https://api.cloudinary.com/v1_1/kylemckell/image/upload",
         {
           method: "POST",
           body: formData
         }
-      );
-      const data = await res.json();
+      )
+        .then((res) => res.json())
+        .then((data) => data.url);
 
-      setAttachments((previousAttachments) => [
-        ...previousAttachments,
-        data.url
-      ]);
+      promises.push(fetchPromise);
     }
 
-    // add sender user info if posting to a brand new convo, so that the other user will have access to username, profile pic, etc.
-    const reqBody = {
-      text: event.target.text.value,
-      recipientId: otherUser.id,
-      conversationId,
-      sender: conversationId ? null : user,
-      attachments
-    };
-    await postMessage(reqBody);
+    const attachments = await Promise.all(promises);
+
+    if (text || attachments.length > 0) {
+      const reqBody = {
+        text,
+        attachments,
+        conversationId,
+        user,
+        otherUser
+      };
+      postMessage(reqBody);
+    }
+
     setText("");
     setSending(false);
     setImageSrcs([]);
@@ -122,6 +123,7 @@ const Input = (props) => {
           value={text}
           name="text"
           onChange={handleTextChange}
+          disabled={sending}
         />
       </FormControl>
       <FormControl>
@@ -132,6 +134,7 @@ const Input = (props) => {
           id="file"
           onChange={handleFileChange}
           multiple
+          disabled={sending}
         />
       </FormControl>
     </form>
