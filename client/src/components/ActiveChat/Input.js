@@ -78,6 +78,7 @@ const Input = (props) => {
         }
       );
       const data = await res.json();
+
       setAttachments((previousAttachments) => [...previousAttachments, data]);
     }
 
