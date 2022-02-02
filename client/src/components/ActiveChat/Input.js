@@ -36,10 +36,10 @@ const useStyles = makeStyles(() => ({
 const Input = (props) => {
   const classes = useStyles();
   const [text, setText] = useState("");
-  const { postMessage, otherUser, conversationId, user } = props;
-  const [sending, setSending] = useState(false);
   const [imageSrcs, setImageSrcs] = useState([]);
   const [attachments, setAttachments] = useState([]);
+  const [sending, setSending] = useState(false);
+  const { postMessage, otherUser, conversationId, user } = props;
 
   const handleTextChange = (event) => {
     setText(event.target.value);
@@ -62,20 +62,22 @@ const Input = (props) => {
     event.preventDefault();
     setSending(true);
 
+    // uploading images to cloudinary
     const formData = new FormData();
+    formData.append("upload_preset", "hatchways");
 
     for (let i = 0; i < imageSrcs.length; i++) {
+      // if file already exists, this will replace the old file
       formData.append("file", imageSrcs[i]);
 
-      formData.append("upload_preset", "hatchways");
-
-      const data = await fetch(
+      const res = await fetch(
         "https://api.cloudinary.com/v1_1/kylemckell/image/upload",
         {
           method: "POST",
           body: formData
         }
-      ).then((r) => r.json());
+      );
+      const data = await res.json();
       setAttachments((previousAttachments) => [...previousAttachments, data]);
     }
 
@@ -88,8 +90,8 @@ const Input = (props) => {
       attachments
     };
     await postMessage(reqBody);
-    setSending(false);
     setText("");
+    setSending(false);
     setImageSrcs([]);
   };
 
