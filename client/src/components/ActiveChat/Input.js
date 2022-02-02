@@ -79,7 +79,10 @@ const Input = (props) => {
       );
       const data = await res.json();
 
-      setAttachments((previousAttachments) => [...previousAttachments, data]);
+      setAttachments((previousAttachments) => [
+        ...previousAttachments,
+        data.url
+      ]);
     }
 
     // add sender user info if posting to a brand new convo, so that the other user will have access to username, profile pic, etc.
