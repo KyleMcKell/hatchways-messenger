@@ -63,12 +63,15 @@ const Input = (props) => {
     // uploading images to cloudinary
     const formData = new FormData();
     formData.append("upload_preset", "hatchways");
+
+    // setting up array to call Promise.all on later
     const promises = [];
 
     for (let i = 0; i < imageSrcs.length; i++) {
       // if file already exists, this will replace the old file
       formData.append("file", imageSrcs[i]);
 
+      // creating promise to upload file
       const fetchPromise = fetch(
         "https://api.cloudinary.com/v1_1/kylemckell/image/upload",
         {
@@ -82,6 +85,7 @@ const Input = (props) => {
       promises.push(fetchPromise);
     }
 
+    // resolving all promises that upload to cloudinary
     const attachments = await Promise.all(promises);
 
     if (text || attachments.length > 0) {
