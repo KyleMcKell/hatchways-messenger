@@ -37,13 +37,15 @@ const Input = (props) => {
   const classes = useStyles();
   const [text, setText] = useState("");
   const { postMessage, otherUser, conversationId, user } = props;
+  const [sending, setSending] = useState(false);
   const [imageSrcs, setImageSrcs] = useState([]);
-  // const [attachments, setAttachments] = useState([]);
+  const [attachments, setAttachments] = useState([]);
 
   const handleTextChange = (event) => {
     setText(event.target.value);
   };
 
+  // when files are added
   const handleFileChange = (fileChangeEvent) => {
     const files = fileChangeEvent.target.files;
     for (let i = 0; i < files.length; i++) {
@@ -58,22 +60,42 @@ const Input = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setSending(true);
+
+    const formData = new FormData();
+
+    for (let i = 0; i < imageSrcs.length; i++) {
+      formData.append("file", imageSrcs[i]);
+
+      formData.append("upload_preset", "hatchways");
+
+      const data = await fetch(
+        "https://api.cloudinary.com/v1_1/kylemckell/image/upload",
+        {
+          method: "POST",
+          body: formData
+        }
+      ).then((r) => r.json());
+      setAttachments((previousAttachments) => [...previousAttachments, data]);
+    }
 
     // add sender user info if posting to a brand new convo, so that the other user will have access to username, profile pic, etc.
     const reqBody = {
       text: event.target.text.value,
       recipientId: otherUser.id,
       conversationId,
-      sender: conversationId ? null : user
-      // attachments
+      sender: conversationId ? null : user,
+      attachments
     };
     await postMessage(reqBody);
+    setSending(false);
     setText("");
+    setImageSrcs([]);
   };
 
   return (
     <form className={classes.root} onSubmit={handleSubmit}>
-      {imageSrcs.length > 0 && (
+      {imageSrcs.length > 0 && !sending && (
         <Grid className={classes.previewGrid}>
           {imageSrcs.map((src, index) => (
             <img
