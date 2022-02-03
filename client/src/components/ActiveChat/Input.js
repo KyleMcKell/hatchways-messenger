@@ -95,11 +95,11 @@ const Input = (props) => {
 
     if (text || attachments.length > 0) {
       const reqBody = {
-        text,
+        text: event.target.text.value,
         attachments,
         conversationId,
-        user,
-        otherUser
+        recipientId: otherUser.id,
+        sender: conversationId ? null : user
       };
       postMessage(reqBody);
     }
