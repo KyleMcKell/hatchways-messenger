@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { FormControl, FilledInput, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
@@ -39,6 +39,9 @@ const Input = (props) => {
   const [sending, setSending] = useState(false);
   const { postMessage, otherUser, conversationId, user } = props;
 
+  // text input ref to put focus
+  const textInputRef = useRef(null);
+
   const handleTextChange = (event) => {
     setText(event.target.value);
   };
@@ -46,6 +49,8 @@ const Input = (props) => {
   // when files are added, display them as a preview
   const handleFileChange = (fileChangeEvent) => {
     const files = fileChangeEvent.target.files;
+    // adjust focus to be able to send images without another click
+    textInputRef.current.focus();
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       const reader = new FileReader();
@@ -126,6 +131,7 @@ const Input = (props) => {
           placeholder="Type something..."
           value={text}
           name="text"
+          inputProps={{ ref: textInputRef }}
           onChange={handleTextChange}
           disabled={sending}
         />
