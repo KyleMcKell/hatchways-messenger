@@ -36,7 +36,7 @@ const SenderBubble = (props) => {
       <Typography className={classes.date}>{time}</Typography>
       {attachments.length > 0 && (
         <Box>
-          <Attachments attachments={attachments} />
+          <Attachments attachments={attachments} isSender />
         </Box>
       )}
       {text && (

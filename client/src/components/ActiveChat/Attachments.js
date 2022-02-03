@@ -7,20 +7,24 @@ const useStyles = makeStyles(() => ({
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))",
     gap: "10px",
-    background: "#F4F6FA",
     padding: 10,
-    borderRadius: 8,
+
     maxWidth: 350 // 3 attachments max
   },
   attachment: {
-    borderRadius: 8,
     width: 100,
     height: 100,
     objectFit: "cover"
+  },
+  attachmentSender: {
+    borderRadius: "10px 10px 0 10px"
+  },
+  attachmentOther: {
+    borderRadius: "0 10px 10px 10px"
   }
 }));
 
-const Attachments = ({ attachments }) => {
+const Attachments = ({ attachments, isSender }) => {
   const classes = useStyles();
 
   return (
@@ -30,7 +34,9 @@ const Attachments = ({ attachments }) => {
           key={index}
           src={attachment}
           alt="preview"
-          className={classes.attachment}
+          className={`${classes.attachment} ${
+            isSender ? classes.attachmentSender : classes.attachmentOther
+          }`}
         />
       ))}
     </Grid>

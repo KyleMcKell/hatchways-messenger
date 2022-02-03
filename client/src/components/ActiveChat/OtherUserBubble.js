@@ -52,7 +52,7 @@ const OtherUserBubble = (props) => {
           </Box>
         )}
         {text && (
-          <Box className={classes.bubble}>
+          <Box className={classes.bubble} isSender={false}>
             <Typography className={classes.text}>{text}</Typography>
           </Box>
         )}

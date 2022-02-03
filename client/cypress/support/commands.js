@@ -1,5 +1,3 @@
-import "cypress-file-upload";
-
 /// <reference types="cypress" />
 Cypress.Commands.add("signup", (username, email, password) => {
   cy.visit("http://localhost:3000/register");
