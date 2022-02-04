@@ -1,5 +1,12 @@
 import React, { useState, useRef } from "react";
-import { FormControl, FilledInput, Grid } from "@material-ui/core";
+import {
+  FormControl,
+  FilledInput,
+  Grid,
+  InputAdornment
+} from "@material-ui/core";
+import FileCopyIcon from "@material-ui/icons/FileCopyOutlined";
+import SentimentSatisfiedOutlinedIcon from "@material-ui/icons/SentimentSatisfiedOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { postMessage } from "../../store/utils/thunkCreators";
@@ -10,11 +17,18 @@ const useStyles = makeStyles(() => ({
     marginTop: 15
   },
   input: {
+    padding: "0px 28px",
     height: 70,
     backgroundColor: "#F4F6FA",
     borderRadius: 8,
     marginTop: 20,
-    marginBottom: 20
+    marginBottom: 20,
+    color: "#a7a9ab",
+    fontWeight: 600,
+    "&:hover": {
+      backgroundColor: "#d7dade",
+      color: "#77797d"
+    }
   },
   previewGrid: {
     display: "grid",
@@ -29,6 +43,20 @@ const useStyles = makeStyles(() => ({
     width: 100,
     height: 100,
     objectFit: "cover"
+  },
+  endAdornment: {
+    display: "flex",
+    gap: 20,
+    color: "#b7babd"
+  },
+  endAdornmentIcon: {
+    "&:hover": {
+      color: "#5a6066",
+      cursor: "pointer"
+    }
+  },
+  fileFormControl: {
+    display: "none"
   }
 }));
 
@@ -131,12 +159,24 @@ const Input = (props) => {
           placeholder="Type something..."
           value={text}
           name="text"
-          inputProps={{ ref: textInputRef }}
+          inputProps={{
+            ref: textInputRef
+          }}
+          endAdornment={
+            <InputAdornment position="end" className={classes.endAdornment}>
+              <SentimentSatisfiedOutlinedIcon
+                className={classes.endAdornmentIcon}
+              />
+              <label htmlFor="file">
+                <FileCopyIcon className={classes.endAdornmentIcon} />
+              </label>
+            </InputAdornment>
+          }
           onChange={handleTextChange}
           disabled={sending}
         />
       </FormControl>
-      <FormControl>
+      <FormControl className={classes.fileFormControl}>
         <input
           accept="image/*"
           type="file"
