@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
     borderRadius: 8,
     marginTop: 20,
     marginBottom: 20,
-    color: "#a7a9ab",
+    color: "#9CADC8",
     fontWeight: 600,
     "&:hover": {
       backgroundColor: "#d7dade",
