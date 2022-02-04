@@ -5,7 +5,8 @@ import { Attachments } from "./index";
 
 const useStyles = makeStyles(() => ({
   root: {
-    display: "flex"
+    display: "flex",
+    paddingTop: 10
   },
   avatar: {
     height: 30,
@@ -21,7 +22,8 @@ const useStyles = makeStyles(() => ({
   },
   bubble: {
     backgroundImage: "linear-gradient(225deg, #6CC1FF 0%, #3A8DFF 100%)",
-    borderRadius: "0 10px 10px 10px"
+    borderRadius: "0 10px 10px 10px",
+    width: "fit-content"
   },
   text: {
     fontSize: 14,
@@ -46,14 +48,19 @@ const OtherUserBubble = (props) => {
         <Typography className={classes.usernameDate}>
           {otherUser.username} {time}
         </Typography>
-        {attachments.length > 0 && (
+        {attachments.length === 1 && (
           <Box>
-            <Attachments attachments={attachments} />
+            <Attachments attachments={attachments} hasText={Boolean(text)} />
           </Box>
         )}
         {text && (
           <Box className={classes.bubble} isSender={false}>
             <Typography className={classes.text}>{text}</Typography>
+          </Box>
+        )}
+        {attachments.length > 1 && (
+          <Box>
+            <Attachments attachments={attachments} hasText={Boolean(text)} />
           </Box>
         )}
       </Box>

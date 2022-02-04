@@ -6,14 +6,18 @@ const useStyles = makeStyles(() => ({
   root: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))",
-    gap: "10px",
-    padding: 10,
+    gap: 7,
 
     maxWidth: 350 // 3 attachments max
   },
-  attachment: {
+  attachmentSingular: {
+    width: 150,
+    height: 150,
+    objectFit: "cover"
+  },
+  attachmentMultiple: {
     width: 100,
-    height: 100,
+    height: 75,
     objectFit: "cover"
   },
   attachmentSender: {
@@ -21,20 +25,40 @@ const useStyles = makeStyles(() => ({
   },
   attachmentOther: {
     borderRadius: "0 10px 10px 10px"
+  },
+  hasText: {
+    paddingTop: 10,
+    paddingBottom: 10
   }
 }));
 
-const Attachments = ({ attachments, isSender }) => {
+const Attachments = ({ attachments, isSender, hasText }) => {
   const classes = useStyles();
 
+  if (attachments.length > 1) {
+    return (
+      <Grid className={`${classes.root} ${hasText ? classes.hasText : ""}`}>
+        {attachments.map((attachment, index) => (
+          <img
+            key={index}
+            src={attachment}
+            alt="preview"
+            className={`${classes.attachmentMultiple} ${
+              isSender ? classes.attachmentSender : classes.attachmentOther
+            }`}
+          />
+        ))}
+      </Grid>
+    );
+  }
   return (
-    <Grid className={classes.root}>
+    <Grid className={`${classes.root}`}>
       {attachments.map((attachment, index) => (
         <img
           key={index}
           src={attachment}
           alt="preview"
-          className={`${classes.attachment} ${
+          className={`${classes.attachmentSingular} ${
             isSender ? classes.attachmentSender : classes.attachmentOther
           }`}
         />

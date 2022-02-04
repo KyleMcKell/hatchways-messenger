@@ -7,7 +7,8 @@ const useStyles = makeStyles(() => ({
   root: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "flex-end"
+    alignItems: "flex-end",
+    paddingTop: 10
   },
   date: {
     fontSize: 11,
@@ -34,7 +35,7 @@ const SenderBubble = (props) => {
   return (
     <Box className={classes.root}>
       <Typography className={classes.date}>{time}</Typography>
-      {attachments.length > 0 && (
+      {attachments.length === 1 && (
         <Box>
           <Attachments attachments={attachments} isSender />
         </Box>
@@ -42,6 +43,15 @@ const SenderBubble = (props) => {
       {text && (
         <Box className={classes.bubble}>
           <Typography className={classes.text}>{text}</Typography>
+        </Box>
+      )}
+      {attachments.length > 1 && (
+        <Box>
+          <Attachments
+            attachments={attachments}
+            hasText={Boolean(text)}
+            isSender
+          />
         </Box>
       )}
     </Box>
