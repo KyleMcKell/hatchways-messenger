@@ -1,70 +1,39 @@
-import React from "react";
-import { Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import React from 'react';
+import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(() => ({
-  root: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))",
-    gap: 7,
-
-    maxWidth: 350 // 3 attachments max
-  },
-  attachmentSingular: {
-    width: 150,
-    height: 150,
-    objectFit: "cover"
-  },
-  attachmentMultiple: {
-    width: 100,
-    height: 75,
-    objectFit: "cover"
-  },
-  attachmentSender: {
-    borderRadius: "10px 10px 0 10px"
-  },
-  attachmentOther: {
-    borderRadius: "0 10px 10px 10px"
-  },
-  hasText: {
-    paddingTop: 10,
-    paddingBottom: 10
-  }
-}));
+const useStyles = (attachments, isSender, hasText) =>
+	makeStyles(() => ({
+		root: {
+			display: 'grid',
+			gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))',
+			gap: 7,
+			maxWidth: 350, // 3 attachments max
+			padding: hasText && attachments.length > 1 ? '10 0' : '0 0',
+		},
+		attachment: {
+			width: attachments.length > 1 ? 100 : 150,
+			height: attachments.length > 1 ? 75 : 150,
+			objectFit: 'cover',
+			borderRadius: isSender ? '10px 10px 0 10px' : '0 10px 10px 10px',
+		},
+	}));
 
 const Attachments = ({ attachments, isSender, hasText }) => {
-  const classes = useStyles();
+	const classes = useStyles(attachments, isSender, hasText)();
 
-  if (attachments.length > 1) {
-    return (
-      <Grid className={`${classes.root} ${hasText ? classes.hasText : ""}`}>
-        {attachments.map((attachment, index) => (
-          <img
-            key={index}
-            src={attachment}
-            alt="preview"
-            className={`${classes.attachmentMultiple} ${
-              isSender ? classes.attachmentSender : classes.attachmentOther
-            }`}
-          />
-        ))}
-      </Grid>
-    );
-  }
-  return (
-    <Grid className={`${classes.root}`}>
-      {attachments.map((attachment, index) => (
-        <img
-          key={index}
-          src={attachment}
-          alt="preview"
-          className={`${classes.attachmentSingular} ${
-            isSender ? classes.attachmentSender : classes.attachmentOther
-          }`}
-        />
-      ))}
-    </Grid>
-  );
+	return (
+		<Grid className={`${classes.root}`}>
+			{attachments.map((attachment, index) => (
+				<img
+					key={index}
+					src={attachment}
+					alt="preview"
+					className={classes.attachment}
+				/>
+			))}
+		</Grid>
+	);
 };
 
 export default Attachments;

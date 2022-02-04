@@ -1,71 +1,79 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Box, Typography, Avatar } from "@material-ui/core";
-import { Attachments } from "./index";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { Box, Typography, Avatar } from '@material-ui/core';
+import { Attachments } from './index';
 
 const useStyles = makeStyles(() => ({
-  root: {
-    display: "flex",
-    paddingTop: 10
-  },
-  avatar: {
-    height: 30,
-    width: 30,
-    marginRight: 11,
-    marginTop: 6
-  },
-  usernameDate: {
-    fontSize: 11,
-    color: "#BECCE2",
-    fontWeight: "bold",
-    marginBottom: 5
-  },
-  bubble: {
-    backgroundImage: "linear-gradient(225deg, #6CC1FF 0%, #3A8DFF 100%)",
-    borderRadius: "0 10px 10px 10px",
-    width: "fit-content"
-  },
-  text: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#FFFFFF",
-    letterSpacing: -0.2,
-    padding: 8
-  }
+	root: {
+		display: 'flex',
+		paddingTop: 10,
+	},
+	avatar: {
+		height: 30,
+		width: 30,
+		marginRight: 11,
+		marginTop: 6,
+	},
+	usernameDate: {
+		fontSize: 11,
+		color: '#BECCE2',
+		fontWeight: 'bold',
+		marginBottom: 5,
+	},
+	bubble: {
+		backgroundImage: 'linear-gradient(225deg, #6CC1FF 0%, #3A8DFF 100%)',
+		borderRadius: '0 10px 10px 10px',
+		width: 'fit-content',
+	},
+	text: {
+		fontSize: 14,
+		fontWeight: 'bold',
+		color: '#FFFFFF',
+		letterSpacing: -0.2,
+		padding: 8,
+	},
 }));
 
 const OtherUserBubble = (props) => {
-  const classes = useStyles();
-  const { text, time, otherUser, attachments } = props;
-  return (
-    <Box className={classes.root}>
-      <Avatar
-        alt={otherUser.username}
-        src={otherUser.photoUrl}
-        className={classes.avatar}
-      ></Avatar>
-      <Box>
-        <Typography className={classes.usernameDate}>
-          {otherUser.username} {time}
-        </Typography>
-        {attachments.length === 1 && (
-          <Box>
-            <Attachments attachments={attachments} hasText={Boolean(text)} />
-          </Box>
-        )}
-        {text && (
-          <Box className={classes.bubble} isSender={false}>
-            <Typography className={classes.text}>{text}</Typography>
-          </Box>
-        )}
-        {attachments.length > 1 && (
-          <Box>
-            <Attachments attachments={attachments} hasText={Boolean(text)} />
-          </Box>
-        )}
-      </Box>
-    </Box>
-  );
+	const classes = useStyles();
+	const { text, time, otherUser, attachments } = props;
+	return (
+		<Box className={classes.root}>
+			<Avatar
+				alt={otherUser.username}
+				src={otherUser.photoUrl}
+				className={classes.avatar}
+			></Avatar>
+			<Box>
+				<Typography className={classes.usernameDate}>
+					{otherUser.username} {time}
+				</Typography>
+				{attachments.length === 1 && (
+					<Box>
+						<Attachments
+							attachments={attachments}
+							hasText={Boolean(text)}
+							isSender={false}
+						/>
+					</Box>
+				)}
+				{text && (
+					<Box className={classes.bubble}>
+						<Typography className={classes.text}>{text}</Typography>
+					</Box>
+				)}
+				{attachments.length > 1 && (
+					<Box>
+						<Attachments
+							attachments={attachments}
+							hasText={Boolean(text)}
+							isSender={false}
+						/>
+					</Box>
+				)}
+			</Box>
+		</Box>
+	);
 };
 
 export default OtherUserBubble;
